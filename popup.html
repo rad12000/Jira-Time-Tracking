@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="popup.css">
+    </head>
+    <body>
+        <div class='menu'>
+            <a class='nav-button' href="#">Home</a>
+            <a class='nav-button' href="#">Options</a>
+        </div>
+
+        <div class='page home'>
+            <div><span  id='logged-events'>0</span> logs to export</div>
+            <input type='text' id="ticket-number" placeholder="Ticket number" autocomplete="off" />
+            <div id='issue-suggestion-container'></div>
+            <input type='text' id="comment" placeholder="comment"autocomplete="off" />
+            <p class="hide">Time Elapsed: <span id="time-spent"></span></p>
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+            <a id="reset">reset</a>
+            <a id="export">export</a>
+        </div>
+
+        <div class='page options hide'>
+            <input type='url' placeholder="Atlassian url... https://mydomain.atlassian.net" id='base-url' />
+            <button id='set-base-url'>Update Jira url</button>
+
+            <button id='set-basic-auth'>Set email and api token</button>
+
+            <div class="assignee-container">
+                <input type="checkbox" id="set-assignee" />
+                <span>Only suggest issues assigned to me</span>
+            </div>
+
+            <details>
+                <summary>
+                    Enabled Jira Projects
+                </summary>
+                <input id='project-search' placeholder="search for your project" type='text' autocomplete="off" />
+                <div id='project-suggestions-container'></div>
+                <div id='project-options-container'></div>
+            </details>
+
+            <details id='issue-types'>
+                <summary>
+                    Enabled Jira Issue Types
+                </summary>
+                <div id='issue-type-container'></div>
+            </details>
+
+            <details id='status-types'>
+                <summary>
+                    Enabled Jira Issue Statuses
+                </summary>
+                <div id='issue-status-container'></div>
+            </details>
+        </div>
+    
+        <script src="./scripts/navigation.js"></script>
+        <script src="./scripts/home.js"></script>
+        <script src="./scripts/jira.js"></script>
+    </body>
+</html>
