@@ -24,6 +24,8 @@ startTimerButton.addEventListener("click", async () => {
     await checkForRunningLog();
 
     timeSpentPTag.classList.add("hide");
+
+    chrome.runtime.sendMessage({message: "Started"});
 });
 
 stopTimerButton.addEventListener("click", async () => {
@@ -32,6 +34,9 @@ stopTimerButton.addEventListener("click", async () => {
 
     timeSpentPTag.classList.remove("hide");
     timeSpentSpan.innerHTML = timeSpent;
+
+        
+    chrome.runtime.sendMessage({message: "Stopped"});
 });
 
 exportButton.addEventListener("click", async () => {
@@ -279,6 +284,10 @@ class TimeEntry extends Array {
 
     get comment() {
        return this[3];
+    }
+
+    get isActive () {
+        return this.timeSpent.length >= 0;
     }
 
     set comment(comment) {
