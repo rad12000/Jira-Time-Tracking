@@ -6,20 +6,26 @@
     </head>
     <body>
         <div class='menu'>
-            <a class='nav-button' href="#">Home</a>
-            <a class='nav-button' href="#">Options</a>
+            <a class='nav-button' href="#">HOME</a>
+            <a class='nav-button' href="#">OPTIONS</a>
         </div>
 
         <div class='page home'>
-            <div><span  id='logged-events'>0</span> logs to export</div>
-            <input type='text' id="ticket-number" placeholder="Ticket number" autocomplete="off" />
+            <input type='text' id="ticket-number" placeholder="issue key" autocomplete="off" />
             <div id='issue-suggestion-container'></div>
             <input type='text' id="comment" placeholder="comment"autocomplete="off" />
+
             <p class="hide">Time Elapsed: <span id="time-spent"></span></p>
-            <button id="start">Start</button>
-            <button id="stop">Stop</button>
-            <a id="reset">reset</a>
-            <a id="export">export</a>
+
+            <button id="start">START</button>
+            <button id="stop">STOP</button>
+
+
+            <div><span  id='logged-events'>0</span> logs to export</div>
+            <br />
+
+            <a id="reset">RESET</a>
+            <a id="export">EXPORT</a>
         </div>
 
         <div class='page options hide'>
@@ -28,37 +34,58 @@
 
             <button id='set-basic-auth'>Set email and api token</button>
 
+            <div class="reminder-period">
+                <p>
+                    Remind me every
+                    <span id="reminder-minutes" contenteditable="true"></span>
+                    minute<span id="plural-minutes" class="hide">s</span>
+                </p>
+            </div>
+
             <div class="assignee-container">
                 <input type="checkbox" id="set-assignee" />
                 <span>Only suggest issues assigned to me</span>
             </div>
 
+            <br />
+
             <details>
                 <summary>
                     Enabled Jira Projects
                 </summary>
-                <input id='project-search' placeholder="search for your project" type='text' autocomplete="off" />
-                <div id='project-suggestions-container'></div>
-                <div id='project-options-container'></div>
+
+                <div class="detail-body">
+                    <input id='project-search' placeholder="search for your project" type='text' autocomplete="off" />
+                    <div id='project-suggestions-container'></div>
+                    <div id='project-options-container'></div>
+                </div>
             </details>
+
+            <br />
 
             <details id='issue-types'>
                 <summary>
                     Enabled Jira Issue Types
                 </summary>
-                <div id='issue-type-container'></div>
+                <div class="detail-body">
+                    <div id='issue-type-container'></div>
+                </div>
             </details>
+
+            <br />
 
             <details id='status-types'>
                 <summary>
                     Enabled Jira Issue Statuses
                 </summary>
-                <div id='issue-status-container'></div>
+                <div class="detail-body">
+                    <div id='issue-status-container'></div>
+                </div>
             </details>
         </div>
     
         <script src="./scripts/navigation.js"></script>
-        <script src="./scripts/home.js"></script>
-        <script src="./scripts/jira.js"></script>
+        <script type="module" src="./scripts/home.js"></script>
+        <script type="module" src="./scripts/jira.js"></script>
     </body>
 </html>

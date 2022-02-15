@@ -3,6 +3,7 @@
     padding: 0px;
     margin: 0px;
     font-size: 16px;
+    font-family: monospace;
 }
 
 body {
@@ -14,32 +15,41 @@ body {
     width: 400px;
     max-height: 500vh;
     padding: 10px;
+    margin-top: 10px
+}
+
+input[type="text"], input[type="url"] {
+    border: solid black 1px;
+    border-radius: 5px;
 }
 
 .home button, .home input {
-    height: 30px;
-    outline: none;
-    margin-top: 10px;
-    padding: 5px;
-    border: solid black 1px;
-    border-radius: 5px;
-    display: block;
     width: 100%;
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 #start {
     background-color: green;
     color: white;
+    border: none;
+    font-weight: bold;
+    box-shadow: black 0px 0px 3px;
 }
 
 #stop {
-    background-color: red;
+    background-color: #d12020;
     color: white;
+    border: none;
+    font-weight: bold;
+    box-shadow: black 0px 0px 3px;
 }
 
 a {
     color: blue;
-    text-decoration: underline;
+    text-decoration: none;
     display: block;
     width: 50%;
     float: left;
@@ -48,8 +58,19 @@ a {
     margin-top: 5px;
 }
 
+.menu > a {
+    margin-bottom: 20px;
+}
+
+a:hover {
+    text-decoration: underline;
+    cursor:grab;
+}
+
 .disabled {
-    background-color: grey !important;
+    position: relative;
+    background-color: rgb(168, 168, 168) !important;
+    box-shadow: black 0px 0px 8px inset !important;
 }
 
 .hide {
@@ -99,4 +120,41 @@ a {
     display: block;
     padding: 10px;
     margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#reminder-minutes {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+    border: none;
+    font-style: italic;
+    font-weight: bold;
+    color: green;
+    text-decoration: underline;
+}
+
+#reminder-minutes:focus {
+    outline: none;
+}
+
+.reminder-period {
+    padding-bottom: 10px;
+}
+
+.inverted {
+    min-width: 1rem;
+    min-height: 1rem;
+    color: white;
+    background-color: gray;
+}
+
+.page.options button {
+    border: none;
+    box-shadow: black 0px 0px 3px;
+}
+
+details > :not(summary) {
+    padding: 10px;
 }
