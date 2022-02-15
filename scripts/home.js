@@ -5,6 +5,7 @@ import { getLastEntry, getLogArray, stopTime, getFormattedDate, saveLogArray } f
 import AppStorage from "./utils/app-storage.js";
 import { moveCursorToEnd } from "./utils/move-to-end.js";
 import { createAlarmAsync } from "./background.js";
+import BadgeUtil from "./utils/badge-util.js";
 
 //#region const
 const csvHeader = ["Ticket No", "Start Date", "Timespent", "Comment"];
@@ -37,16 +38,17 @@ startTimerButton.addEventListener("click", async () => {
     timeSpentPTag.classList.add("hide");
 
     chrome.runtime.sendMessage({message: "Started"});
+    BadgeUtil.showTrackingBadgeAsync();
 });
 
 stopTimerButton.addEventListener("click", async () => {
     var timeSpent = await stopTime();
-    await displayLogCount();
-    await checkForRunningLog();
 
     timeSpentPTag.classList.remove("hide");
     timeSpentSpan.innerHTML = timeSpent;
 
+    await displayLogCount();
+    await checkForRunningLog();
         
     chrome.runtime.sendMessage({message: "Stopped"});
 });

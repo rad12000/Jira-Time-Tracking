@@ -54,7 +54,10 @@ function displayDomain() {
 function updateBaseUrl() {
     SearchOptions.domain = document.getElementById("base-url").value;
     AppStorage.setAtlassianDomainAsync(SearchOptions.domain)
-    .then(_ => jiraService.refreshClientAsync());
+    .then(_ => {
+        jiraService.refreshClientAsync();
+        alert("Your url was successfully updated!")
+    });
 }
 
 function setBasicAuth() {

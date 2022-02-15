@@ -1,5 +1,6 @@
 import TimeEntry from "../classes/time-entry.js";
 import jiraService from "../services/jira-service.js";
+import BadgeUtil from "../utils/badge-util.js";
 
 async function getLogArray() {
     var { logArray } = await chrome.storage.sync.get('logArray');
@@ -91,6 +92,7 @@ async function stopTime() {
         await removeLastEntry()
     }
 
+    BadgeUtil.hideTrackingBadgeAsync();
     return timeSpent;
 }
 
