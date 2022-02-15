@@ -2,6 +2,9 @@ import TimeEntry from "./classes/time-entry.js";
 import exportToCsv from "./utils/array-to-csv.js";
 import { showJiraSuggestionsAsync } from "./jira.js";
 import { getLastEntry, getLogArray, stopTime, getFormattedDate, saveLogArray } from "./utils/log.js";
+import AppStorage from "./utils/app-storage.js";
+import { moveCursorToEnd } from "./utils/move-to-end.js";
+import { createAlarmAsync } from "./background.js";
 
 //#region const
 const csvHeader = ["Ticket No", "Start Date", "Timespent", "Comment"];
@@ -15,11 +18,14 @@ const ticketInput = document.getElementById("ticket-number");
 const timeSpentSpan = document.getElementById("time-spent");
 const timeSpentPTag = document.getElementsByTagName("P")[0];
 const eventCounter = document.getElementById("logged-events");
+const pluralMinuteSpan = document.getElementById("plural-minutes");
+const reminderMinuteInput = document.getElementById("reminder-minutes");
 //#endregion
 
 //#region event listeners
-window.addEventListener('load', async () => {
-    await displayLogCount();
+window.addEventListener('load', () => {
+    displayLogCount();
+    displayReminderDuration();
 
     ticketInput.addEventListener('input', showJiraSuggestionsAsync);
 });
@@ -58,11 +64,49 @@ resetButton.addEventListener("click", async () => {
     await displayLogCount();
     window.close();
 });
+
+reminderMinuteInput.addEventListener("input", async (e) => {
+    const str = e.target.innerText;
+    if (str.length === 0) {
+        reminderMinuteInput.classList.add("inverted");
+        return;
+    };
+
+    reminderMinuteInput.classList.remove("inverted");
+
+    let val = Number(str);
+
+    if (isNaN(val) || val < 1) {
+        val = 60;   
+    }
+
+    val = Math.round(val);
+
+    if (val === 1) {
+        pluralMinuteSpan.classList.add("hide");
+    } else {
+        pluralMinuteSpan.classList.remove("hide");
+    }
+
+    AppStorage.setMinutesToRemindAsync(val).then(e => createAlarmAsync());
+    reminderMinuteInput.innerText = val;
+    moveCursorToEnd(e.target);
+});
 //#endregion
 
 //#region setup
 getLoggedEventCount();
 checkForRunningLog();
+async function displayReminderDuration() {
+    const duration = await AppStorage.getMinutesToRemindAsync();
+    reminderMinuteInput.innerText = duration;
+    if (duration === 1) {
+        pluralMinuteSpan.classList.add("hide");
+    } else {
+        pluralMinuteSpan.classList.remove("hide");
+    }
+}
+
 async function checkForRunningLog() {
     const lastEntry = await getLastEntry();
 

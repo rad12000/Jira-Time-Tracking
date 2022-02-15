@@ -8,9 +8,6 @@ class JiraService {
 
     async refreshClientAsync() {
         const auth = await AppStorage.getAtlassianAuthAsync();
-
-        console.log(`Well ${auth}`)
-
         SearchOptions.domain = await AppStorage.getAtlassianDomainAsync();
         this.#httpClient = new HttpClient(SearchOptions.urlBase(), auth);
     }
@@ -135,7 +132,6 @@ class JiraService {
         const { signal } = this.#abortController;
 
         str = str.replace(/[^A-Za-z0-9]/g, " ");
-        console.log(str);
 
         let JQL = "";
         const queryParams = {
@@ -184,7 +180,6 @@ class JiraService {
         if (res === false) return false;
 
         const response = res.sections;
-        console.log(response);
         if (!response) return [];
 
         let [history, current] = response;

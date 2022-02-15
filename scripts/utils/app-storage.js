@@ -69,7 +69,6 @@ class AppStorage {
         let isComplete = false;
         // Remove any forward slashes at the end of the url
         while (!isComplete) {
-            console.log()
             const length = url.length;
             if (length === 0) {
                 isComplete = true;

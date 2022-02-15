@@ -161,7 +161,7 @@ function toggleStatusType(e) {
         SearchOptions.enabledStatuses.splice(index, 1);
     }
 
-    saveEnabledStatuses();
+    AppStorage.setEnabledStatusesAsync(SearchOptions.enabledStatuses);
 }
 
 function createStatusTypeEl(name, id, isChecked) {

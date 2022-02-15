@@ -37,7 +37,7 @@ class TimeEntry extends Array {
     }
 
     get isActive () {
-        return this.timeSpent.length >= 0;
+        return this.timeSpent.length === 0;
     }
 
     set comment(comment) {

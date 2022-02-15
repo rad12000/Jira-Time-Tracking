@@ -28,7 +28,6 @@ class HttpClient {
      * @returns 
      */
     async getAsync(path, params, signal) {
-        console.log(this.#urlBase);
         const url = new URL(`${this.#urlBase}/${path}`);
 
         if (params) {

@@ -47,8 +47,10 @@ function createNotificationDecisionListener() {
 //#region Helper funcs
 async function createAlarmAsync() {
     await clearAlarmsAsync();
-    console.log(SearchOptions.domain) 
-    return await chrome.alarms.create("Reminder check", {delayInMinutes: 1});
+    
+    const minutes = await AppStorage.getMinutesToRemindAsync();
+
+    return await chrome.alarms.create("Reminder check", {delayInMinutes: minutes});
 }
 
 async function clearAlarmsAsync() {
@@ -118,3 +120,5 @@ function displayWarningNotificationAsync(issueKey) {
     })
 }
 //#endregion
+
+export { createAlarmAsync };

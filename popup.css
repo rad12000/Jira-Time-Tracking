@@ -100,3 +100,28 @@ a {
     padding: 10px;
     margin-bottom: 10px;
 }
+
+#reminder-minutes {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+    border: none;
+    font-style: italic;
+    font-weight: bold;
+}
+
+#reminder-minutes:focus {
+    outline: none;
+}
+
+.reminder-period {
+    padding-bottom: 10px;
+}
+
+.inverted {
+    min-width: 1rem;
+    min-height: 1rem;
+    color: white;
+    background-color: gray;
+}
