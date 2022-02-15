@@ -23,7 +23,7 @@ input[type="text"], input[type="url"] {
     border-radius: 5px;
 }
 
-.home button, .home input {
+.home button, .home input, #project-search {
     width: 100%;
     display: block;
     padding: 10px;
@@ -62,6 +62,14 @@ a {
     margin-bottom: 20px;
 }
 
+button:hover, .remove-project:hover {
+    cursor: grab;
+}
+
+button:active {
+    box-shadow: black 0px 0px 3px inset !important;
+}
+
 a:hover {
     text-decoration: underline;
     cursor:grab;
@@ -85,12 +93,25 @@ a:hover {
     padding-top: 10px;
 }
 
-#project-search, .project-suggestion, .issue-suggestion {
+.project-suggestion, .issue-suggestion {
     width: 100%;
     height: 40px;
     display: block;
-    margin-bottom: 10px;
-    padding: 10px
+    padding: 10px;
+    overflow-y: hidden;
+    border: none;
+    border-bottom: solid black 1px;
+    border-radius: 0px !important;
+    margin-bottom: 0px !important;
+    box-shadow: black 0px 0px 3px;
+}
+
+.project-suggestion:hover, .issue-suggestion:hover {
+    box-shadow: black 0px 0px 3px inset !important;
+}
+
+.project-suggestion:last-child, .issue-suggestion:last-child {
+    margin-bottom: 10px !important;
 }
 
 .enabled-project-wrapper {
@@ -108,11 +129,7 @@ a:hover {
 }
 
 .home .issue-suggestion {
-    width: 100%;
     height: 100% !important;
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px
 }
 
 #base-url, #set-base-url, #set-basic-auth {
