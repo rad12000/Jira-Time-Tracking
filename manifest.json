@@ -1,7 +1,7 @@
 {
     "name": "Jira Time Tracking",
     "description": "Quick and easy time tracking for Jira. Start the clock on your story and export the spreadsheet when you're done!",
-    "version": "1.0.0.0",
+    "version": "1.0.0.2",
     "manifest_version": 3,
     "icons": {
         "16": "icons/icon16.png",

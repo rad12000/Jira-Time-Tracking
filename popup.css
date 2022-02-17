@@ -37,6 +37,11 @@ input[type="text"], input[type="url"] {
     border: none;
     font-weight: bold;
     box-shadow: black 0px 0px 3px;
+    width: 50%;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    margin-top:10px;
+    float: left;
 }
 
 #stop {
@@ -45,6 +50,11 @@ input[type="text"], input[type="url"] {
     border: none;
     font-weight: bold;
     box-shadow: black 0px 0px 3px;
+    width: 50%;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    margin-top:10px;
+    float: left;
 }
 
 a {
@@ -79,6 +89,10 @@ a:hover {
     position: relative;
     background-color: rgb(168, 168, 168) !important;
     box-shadow: black 0px 0px 8px inset !important;
+}
+
+.disabled:hover {
+    cursor: not-allowed;
 }
 
 .hide {
