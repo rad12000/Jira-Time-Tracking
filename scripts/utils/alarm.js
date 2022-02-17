@@ -1,17 +1,24 @@
 import AppStorage from './app-storage.js';
+import { getLastEntry } from "./log.js";
+
+async function hasLogInProgressAsync() {
+    const entry = await getLastEntry();
+    if (!entry) return false;
+
+    return entry.isActive;
+}
 
 async function createAlarmAsync() {
-    console.log("Calling clear alarms")
+    if (!(await hasLogInProgressAsync())) return;
+
     await clearAlarmsAsync();
     
     const minutes = await AppStorage.getMinutesToRemindAsync();
 
-    console.log("Alarm created "  + new Date())
     return await chrome.alarms.create("Reminder check", {delayInMinutes: minutes});
 }
 
 async function clearAlarmsAsync() {
-    console.log("Alarms cleared")
     return await chrome.alarms.clearAll();
 }
 
