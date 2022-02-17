@@ -4,8 +4,8 @@ import { showJiraSuggestionsAsync } from "./jira.js";
 import { getLastEntry, getLogArray, stopTime, getFormattedDate, saveLogArray } from "./utils/log.js";
 import AppStorage from "./utils/app-storage.js";
 import { moveCursorToEnd } from "./utils/move-to-end.js";
-import { createAlarmAsync } from "./background.js";
 import BadgeUtil from "./utils/badge-util.js";
+import { createAlarmAsync } from "./utils/alarm.js";
 
 //#region const
 const csvHeader = ["Ticket No", "Start Date", "Timespent", "Comment"];
@@ -68,6 +68,7 @@ resetButton.addEventListener("click", async () => {
 });
 
 reminderMinuteInput.addEventListener("input", async (e) => {
+    console.log("input event called")
     const str = e.target.innerText;
     if (str.length === 0) {
         reminderMinuteInput.classList.add("inverted");

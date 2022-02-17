@@ -127,11 +127,11 @@ class JiraService {
          }
         
          
-        this.#abortController?.abort();
+        // this.#abortController?.abort();
         this.#abortController = new AbortController();
         const { signal } = this.#abortController;
 
-        str = str.replace(/[^A-Za-z0-9]/g, " ");
+        str = str.replace(/[^A-Za-z0-9\-]/g, " ");
 
         let JQL = "";
         const queryParams = {

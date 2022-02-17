@@ -1,8 +1,7 @@
 import jiraService from "./services/jira-service.js";
-import SearchOptions from "./static/search-options.js";
-import AppStorage from "./utils/app-storage.js";
 import { getLastEntry } from "./utils/log.js";
 import { stopTime } from "./utils/log.js";
+import { createAlarmAsync, clearAlarmsAsync } from "./utils/alarm.js";
 
 const notificationResolve = {};
 createListener();
@@ -41,20 +40,6 @@ function createNotificationDecisionListener() {
         resolver(buttonIndex);
         delete notificationResolve[notificationId]
     });
-}
-//#endregion
-
-//#region Helper funcs
-async function createAlarmAsync() {
-    await clearAlarmsAsync();
-    
-    const minutes = await AppStorage.getMinutesToRemindAsync();
-
-    return await chrome.alarms.create("Reminder check", {delayInMinutes: minutes});
-}
-
-async function clearAlarmsAsync() {
-    return await chrome.alarms.clearAll();
 }
 //#endregion
 
@@ -120,5 +105,3 @@ function displayWarningNotificationAsync(issueKey) {
     })
 }
 //#endregion
-
-export { createAlarmAsync };

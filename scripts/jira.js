@@ -272,16 +272,17 @@ function createProjectSuggestion(projectName, key) {
 //#endregion
 
 //#region Issue Suggestions
+let lastShownSuggestionTime = 0;
 export async function showJiraSuggestionsAsync(e) {
     const searchVal = e.target.value;
     if (searchVal.length === 0) {
+        lastShownSuggestionTime = Date.now();
         jiraService.abortIssueSuggestion();
-        setTimeout(() => {
-            document.getElementById("issue-suggestion-container").innerHTML = "";
-        }, 500);
+        document.getElementById("issue-suggestion-container").innerHTML = "";
         return;
     }
 
+    const startTime = Date.now();
     const issues = await jiraService.getIssueSuggestionsAsync(searchVal, true);
 
     if (issues === false) return;
@@ -312,7 +313,10 @@ export async function showJiraSuggestionsAsync(e) {
         }
     }
 
-    displayIssueSuggestions(issues);
+    if (startTime >= lastShownSuggestionTime) {
+        lastShownSuggestionTime = startTime;
+        displayIssueSuggestions(issues);
+    }
 }
 
 function displayIssueSuggestions(issues) {
