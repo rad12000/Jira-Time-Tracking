@@ -5,7 +5,7 @@ import { getLastEntry, getLogArray, stopTime, getFormattedDate, saveLogArray } f
 import AppStorage from "./utils/app-storage.js";
 import { moveCursorToEnd } from "./utils/move-to-end.js";
 import BadgeUtil from "./utils/badge-util.js";
-import { createAlarmAsync } from "./utils/alarm.js";
+import { createReminderAlarmAsync } from "./utils/alarm.js";
 
 //#region const
 const csvHeader = ["Ticket No", "Start Date", "Timespent", "Comment"];
@@ -37,7 +37,10 @@ startTimerButton.addEventListener("click", async () => {
 
     timeSpentPTag.classList.add("hide");
 
-    chrome.runtime.sendMessage({message: "Started"});
+    chrome.runtime.sendMessage({
+        message: "Started",
+        callback: (e) => { }
+    });
     BadgeUtil.showTrackingBadgeAsync();
 });
 
@@ -50,7 +53,10 @@ stopTimerButton.addEventListener("click", async () => {
     await displayLogCount();
     await checkForRunningLog();
         
-    chrome.runtime.sendMessage({message: "Stopped"});
+    chrome.runtime.sendMessage({
+        message: "Stopped",
+        callback: (e) => {}
+    });
 });
 
 exportButton.addEventListener("click", async () => {
@@ -68,7 +74,6 @@ resetButton.addEventListener("click", async () => {
 });
 
 reminderMinuteInput.addEventListener("input", async (e) => {
-    console.log("input event called")
     const str = e.target.innerText;
     if (str.length === 0) {
         reminderMinuteInput.classList.add("inverted");
@@ -91,7 +96,7 @@ reminderMinuteInput.addEventListener("input", async (e) => {
         pluralMinuteSpan.classList.remove("hide");
     }
 
-    AppStorage.setMinutesToRemindAsync(val).then(e => createAlarmAsync());
+    AppStorage.setMinutesToRemindAsync(val).then(e => createReminderAlarmAsync());
     reminderMinuteInput.innerText = val;
     moveCursorToEnd(e.target);
 });

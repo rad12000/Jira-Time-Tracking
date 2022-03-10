@@ -1,4 +1,18 @@
 class AppStorage {
+    static getShouldAutoStopAsync = async() => {
+        const shouldAutoStop = await this.#getItemAsync("autoStop");
+
+        if (!shouldAutoStop) {
+            return false;
+        }
+
+        return shouldAutoStop;
+    }
+
+    static setShouldAutoStopAsync = async(shouldAutoStop) => {
+        return await this.#setItemAsync("autoStop", shouldAutoStop);
+    }
+
     static getMinutesToRemindAsync = async () => {
         const minutesToRemind = await this.#getItemAsync("minutesToRemind");
 
@@ -9,9 +23,9 @@ class AppStorage {
         return Number(minutesToRemind);
      }
  
-     static setMinutesToRemindAsync = async (minutes) => {
-         return await this.#setItemAsync("minutesToRemind", minutes)
-     }
+    static setMinutesToRemindAsync = async (minutes) => {
+        return await this.#setItemAsync("minutesToRemind", minutes)
+    }
 
     static getAssigneeOnlyAsync = async () => {
        return await this.#getItemAsync("assigneeOnly");
