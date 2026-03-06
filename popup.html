@@ -6,104 +6,168 @@
   </head>
   <body>
     <div class="menu">
-      <a class="nav-button" href="#">HOME</a>
+      <a class="nav-button active" href="#">HOME</a>
       <a class="nav-button" href="#">OPTIONS</a>
     </div>
 
     <div class="page home">
-      <input
-        type="text"
-        id="ticket-number"
-        placeholder="issue key"
-        autocomplete="off"
-      />
-      <div id="issue-suggestion-container"></div>
-      <input
-        type="text"
-        id="comment"
-        placeholder="comment"
-        autocomplete="off"
-      />
+      <section class="settings-section">
+        <h3>Time Tracker</h3>
+        <p class="section-description">
+          Search for a Jira issue and track your time.
+        </p>
 
-      <p class="hide">Time Elapsed: <span id="time-spent"></span></p>
+        <div class="input-group">
+          <label for="ticket-number">Jira Issue</label>
+          <input
+            type="text"
+            id="ticket-number"
+            placeholder="Search for an issue (e.g. PROJ-123)"
+            autocomplete="off"
+          />
+          <div id="issue-suggestion-container"></div>
+        </div>
 
-      <button id="start">START</button>
-      <button id="stop">STOP</button>
+        <div class="input-group">
+          <label for="comment">Work Description</label>
+          <input
+            type="text"
+            id="comment"
+            placeholder="What are you working on?"
+            autocomplete="off"
+          />
+        </div>
 
-      <div><span id="logged-events">0</span> logs to export</div>
-      <br />
+        <p class="time-elapsed hide">
+          Time Elapsed: <span id="time-spent"></span>
+        </p>
 
-      <a id="reset">RESET</a>
-      <a id="export">EXPORT</a>
+        <div class="button-group">
+          <button id="start">Start Tracking</button>
+          <button id="stop">Stop Tracking</button>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h3>Time Log</h3>
+        <p class="section-description">
+          Entries that failed to sync to Jira are saved here. Export them as a
+          CSV to manually log your time, or clear them once resolved.
+        </p>
+
+        <div class="log-counter">
+          <span id="logged-events">0</span> time entries pending
+        </div>
+
+        <div class="button-group">
+          <button id="export" class="btn-primary">Export CSV</button>
+          <button id="reset" class="btn-danger-outline">Clear All</button>
+        </div>
+      </section>
     </div>
 
     <div class="page options hide">
-      <input
-        type="url"
-        placeholder="Atlassian url... https://mydomain.atlassian.net"
-        id="base-url"
-      />
-      <button id="set-base-url">Update Jira url</button>
-
-      <select id="auth-selector">
-        Authentication Method
-        <option value="basic-auth">Basic Authentication</option>
-        <option value="bearer-token">Personal Access Token</option>
-      </select>
-      <button class="set-auth hide" id="set-basic-auth">
-        Set email and api token
-      </button>
-      <button class="set-auth hide" id="set-bearer-token">
-        Set Personal Access Token
-      </button>
-
-      <div class="reminder-period">
-        <p>
-          Remind me every
-          <span id="reminder-minutes" contenteditable="true"></span>
-          minute<span id="plural-minutes" class="hide">s</span>
+      <section class="settings-section">
+        <h3>Jira Connection</h3>
+        <p class="section-description">
+          Configure your Atlassian workspace URL and authentication.
         </p>
-      </div>
 
-      <div class="assignee-container">
-        <input type="checkbox" id="set-assignee" />
-        <span>Only suggest issues assigned to me</span>
-      </div>
-
-      <br />
-
-      <details>
-        <summary>Enabled Jira Projects</summary>
-
-        <div class="detail-body">
+        <div class="input-group">
+          <label for="base-url">Workspace URL</label>
           <input
-            id="project-search"
-            placeholder="search for your project"
-            type="text"
-            autocomplete="off"
+            type="url"
+            placeholder="https://your-domain.atlassian.net"
+            id="base-url"
           />
-          <div id="project-suggestions-container"></div>
-          <div id="project-options-container"></div>
         </div>
-      </details>
+        <button id="set-base-url">Save URL</button>
 
-      <br />
-
-      <details id="issue-types">
-        <summary>Enabled Jira Issue Types</summary>
-        <div class="detail-body">
-          <div id="issue-type-container"></div>
+        <div class="input-group">
+          <label for="auth-selector">Authentication Method</label>
+          <select id="auth-selector">
+            <option value="basic-auth">
+              Basic Authentication (Email + API Token)
+            </option>
+            <option value="bearer-token">Personal Access Token</option>
+          </select>
         </div>
-      </details>
+        <button class="set-auth hide" id="set-basic-auth">
+          Configure Email & API Token
+        </button>
+        <button class="set-auth hide" id="set-bearer-token">
+          Configure Access Token
+        </button>
+      </section>
 
-      <br />
+      <section class="settings-section">
+        <h3>Reminders</h3>
+        <p class="section-description">
+          Get notified to check if you're still working on an issue.
+        </p>
 
-      <details id="status-types">
-        <summary>Enabled Jira Issue Statuses</summary>
-        <div class="detail-body">
-          <div id="issue-status-container"></div>
+        <div class="reminder-period">
+          <p>
+            Remind me every
+            <span id="reminder-minutes" contenteditable="true">60</span>
+            minute<span id="plural-minutes">s</span>
+          </p>
         </div>
-      </details>
+      </section>
+
+      <section class="settings-section">
+        <h3>Search Filters</h3>
+        <p class="section-description">
+          Customize which issues appear in search suggestions.
+        </p>
+
+        <div class="assignee-container">
+          <input type="checkbox" id="set-assignee" />
+          <span>Only show issues assigned to me</span>
+        </div>
+
+        <details>
+          <summary>Projects</summary>
+          <div class="detail-body">
+            <p class="detail-description">
+              Select which Jira projects to include in search results.
+            </p>
+            <input
+              id="project-search"
+              placeholder="Search for a project..."
+              type="text"
+              autocomplete="off"
+            />
+            <div id="project-suggestions-container"></div>
+            <div id="project-options-container"></div>
+            <p class="empty-state" id="no-projects">
+              No projects selected. Search above to add projects.
+            </p>
+          </div>
+        </details>
+
+        <details id="issue-types">
+          <summary>Issue Types</summary>
+          <div class="detail-body">
+            <p class="detail-description">
+              Filter suggestions by issue type (e.g. Story, Bug, Task).
+            </p>
+            <div id="issue-type-container"></div>
+            <p class="empty-state">Loading issue types...</p>
+          </div>
+        </details>
+
+        <details id="status-types">
+          <summary>Issue Statuses</summary>
+          <div class="detail-body">
+            <p class="detail-description">
+              Filter suggestions by status category.
+            </p>
+            <div id="issue-status-container"></div>
+            <p class="empty-state">Loading statuses...</p>
+          </div>
+        </details>
+      </section>
     </div>
 
     <script src="./scripts/navigation.js"></script>

@@ -17,7 +17,7 @@ const resetButton = document.getElementById("reset");
 const commentInput = document.getElementById("comment");
 const ticketInput = document.getElementById("ticket-number");
 const timeSpentSpan = document.getElementById("time-spent");
-const timeSpentPTag = document.getElementsByTagName("P")[0];
+const timeElapsedDisplay = document.querySelector(".time-elapsed");
 const eventCounter = document.getElementById("logged-events");
 const pluralMinuteSpan = document.getElementById("plural-minutes");
 const reminderMinuteInput = document.getElementById("reminder-minutes");
@@ -35,7 +35,7 @@ startTimerButton.addEventListener("click", async () => {
     await createNewEntry();
     await checkForRunningLog();
 
-    timeSpentPTag.classList.add("hide");
+    timeElapsedDisplay.classList.add("hide");
 
     chrome.runtime.sendMessage({message: "Started"});
     BadgeUtil.showTrackingBadgeAsync();
@@ -44,7 +44,7 @@ startTimerButton.addEventListener("click", async () => {
 stopTimerButton.addEventListener("click", async () => {
     var timeSpent = await stopTime();
 
-    timeSpentPTag.classList.remove("hide");
+    timeElapsedDisplay.classList.remove("hide");
     timeSpentSpan.innerHTML = timeSpent;
 
     await displayLogCount();
