@@ -1,177 +1,189 @@
 * {
-    box-sizing: border-box;
-    padding: 0px;
-    margin: 0px;
-    font-size: 16px;
-    font-family: monospace;
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  font-size: 16px;
+  font-family: monospace;
 }
 
 body {
-    text-align: center;
-    padding: 10px;
+  text-align: center;
+  padding: 10px;
 }
 
 .page {
-    width: 400px;
-    max-height: 500vh;
-    padding: 10px;
-    margin-top: 10px
+  width: 400px;
+  max-height: 500vh;
+  padding: 10px;
+  margin-top: 10px;
 }
 
-input[type="text"], input[type="url"] {
-    border: solid black 1px;
-    border-radius: 5px;
+input[type="text"],
+input[type="url"] {
+  border: solid black 1px;
+  border-radius: 5px;
 }
 
-.home button, .home input, #project-search {
-    width: 100%;
-    display: block;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+.home button,
+.home input,
+#project-search {
+  width: 100%;
+  display: block;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 #start {
-    background-color: green;
-    color: white;
-    border: none;
-    font-weight: bold;
-    box-shadow: black 0px 0px 3px;
+  background-color: green;
+  color: white;
+  border: none;
+  font-weight: bold;
+  box-shadow: black 0px 0px 3px;
 }
 
 #stop {
-    background-color: #d12020;
-    color: white;
-    border: none;
-    font-weight: bold;
-    box-shadow: black 0px 0px 3px;
+  background-color: #d12020;
+  color: white;
+  border: none;
+  font-weight: bold;
+  box-shadow: black 0px 0px 3px;
 }
 
 a {
-    color: blue;
-    text-decoration: none;
-    display: block;
-    width: 50%;
-    float: left;
-    text-align: center;
-    margin-bottom: 10px;
-    margin-top: 5px;
+  color: blue;
+  text-decoration: none;
+  display: block;
+  width: 50%;
+  float: left;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 5px;
 }
 
 .menu > a {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-button:hover, .remove-project:hover {
-    cursor: grab;
+button:hover,
+.remove-project:hover {
+  cursor: grab;
 }
 
 button:active {
-    box-shadow: black 0px 0px 3px inset !important;
+  box-shadow: black 0px 0px 3px inset !important;
 }
 
 a:hover {
-    text-decoration: underline;
-    cursor:grab;
+  text-decoration: underline;
+  cursor: grab;
 }
 
 .disabled {
-    position: relative;
-    background-color: rgb(168, 168, 168) !important;
-    box-shadow: black 0px 0px 8px inset !important;
+  position: relative;
+  background-color: rgb(168, 168, 168) !important;
+  box-shadow: black 0px 0px 8px inset !important;
 }
 
 .hide {
-    display: none;
+  display: none !important;
 }
 
 .options {
-    text-align: left;
+  text-align: left;
 }
 
 #project-suggestions-container {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
-.project-suggestion, .issue-suggestion {
-    width: 100%;
-    height: 40px;
-    display: block;
-    padding: 10px;
-    overflow-y: hidden;
-    border: none;
-    border-bottom: solid black 1px;
-    border-radius: 0px !important;
-    margin-bottom: 0px !important;
-    box-shadow: black 0px 0px 3px;
+.project-suggestion,
+.issue-suggestion {
+  width: 100%;
+  height: 40px;
+  display: block;
+  padding: 10px;
+  overflow-y: hidden;
+  border: none;
+  border-bottom: solid black 1px;
+  border-radius: 0px !important;
+  margin-bottom: 0px !important;
+  box-shadow: black 0px 0px 3px;
 }
 
-.project-suggestion:hover, .issue-suggestion:hover {
-    box-shadow: black 0px 0px 3px inset !important;
+.project-suggestion:hover,
+.issue-suggestion:hover {
+  box-shadow: black 0px 0px 3px inset !important;
 }
 
-.project-suggestion:last-child, .issue-suggestion:last-child {
-    margin-bottom: 10px !important;
+.project-suggestion:last-child,
+.issue-suggestion:last-child {
+  margin-bottom: 10px !important;
 }
 
 .enabled-project-wrapper {
-    position: relative;
-    padding: 10px;
-    background-color: lightblue;
-    margin-bottom: 10px;
+  position: relative;
+  padding: 10px;
+  background-color: lightblue;
+  margin-bottom: 10px;
 }
 
 .remove-project {
-    float: right;
-    font-size: 1em;
-    color: red;
-    font-weight: bolder;
+  float: right;
+  font-size: 1em;
+  color: red;
+  font-weight: bolder;
 }
 
 .home .issue-suggestion {
-    height: 100% !important;
+  height: 100% !important;
 }
 
-#base-url, #set-base-url, #set-basic-auth {
-    width: 100%;
-    display: block;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+#base-url,
+#set-base-url,
+#set-basic-auth,
+#set-bearer-token,
+select {
+  width: 100%;
+  display: block;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 #reminder-minutes {
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    font-size: 1.5rem;
-    border: none;
-    font-style: italic;
-    font-weight: bold;
-    color: green;
-    text-decoration: underline;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.5rem;
+  border: none;
+  font-style: italic;
+  font-weight: bold;
+  color: green;
+  text-decoration: underline;
 }
 
 #reminder-minutes:focus {
-    outline: none;
+  outline: none;
 }
 
 .reminder-period {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 .inverted {
-    min-width: 1rem;
-    min-height: 1rem;
-    color: white;
-    background-color: gray;
+  min-width: 1rem;
+  min-height: 1rem;
+  color: white;
+  background-color: gray;
 }
 
 .page.options button {
-    border: none;
-    box-shadow: black 0px 0px 3px;
+  border: none;
+  box-shadow: black 0px 0px 3px;
 }
 
 details > :not(summary) {
-    padding: 10px;
+  padding: 10px;
 }
+
