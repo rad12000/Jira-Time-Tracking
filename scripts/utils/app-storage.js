@@ -1,4 +1,33 @@
 class AppStorage {
+  /**
+   * @param {string} itemKey
+   * @param {number} expireAfterMilliseconds
+   * @param {() => Promise<any>} loadFn
+   */
+  static async getCachedItemOrLoad(itemKey, expireAfterMilliseconds, loadFn) {
+    let item = localStorage.getItem("cache_" + itemKey);
+    if (item) {
+      item = JSON.parse(item);
+    }
+
+    if (
+      !item ||
+      new Date() - new Date(item.updatedAt) >= expireAfterMilliseconds
+    ) {
+      const result = await loadFn();
+      localStorage.setItem(
+        "cache_" + itemKey,
+        JSON.stringify({
+          updatedAt: new Date().toISOString(),
+          value: result,
+        }),
+      );
+      return result;
+    }
+
+    return item.value;
+  }
+
   static getMinutesToRemindAsync = async () => {
     const minutesToRemind = await this.#getItemAsync("minutesToRemind");
 

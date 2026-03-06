@@ -35,7 +35,8 @@ class HttpClient {
     }
 
     if (!signal) {
-      return (await fetch(url, this.#requestOptions)).json();
+      const controller = new AbortController();
+      signal = controller.signal;
     }
 
     const options = {
@@ -44,7 +45,13 @@ class HttpClient {
     };
 
     try {
-      return (await fetch(url, options)).json();
+      const res = await fetch(url, options);
+      if (!res.ok) {
+        throw new Error(
+          `Request failed with status ${res.status} - ${await res.text()}`,
+        );
+      }
+      return res.json();
     } catch (e) {
       if (e.name === "AbortError") {
         return false;
@@ -80,4 +87,3 @@ class HttpClient {
 }
 
 export default HttpClient;
-

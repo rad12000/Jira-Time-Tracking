@@ -95,8 +95,51 @@ class JiraService {
       query: projectName,
     };
 
-    return (await this.#httpClient.getAsync("project/search", queryParams))
-      .values;
+    const searchResults = await new Promise((r, reject) => {
+      let completedCount = 0;
+      let resolved = false;
+      const resolve = (value) => {
+        completedCount++;
+        if (resolved) return;
+        resolved = true;
+        r(value);
+      };
+
+      const errorHandler = (e) => {
+        if (completedCount++ > 0 && !resolved) {
+          reject(e);
+        }
+      };
+      this.#httpClient
+        .getAsync("project/search", queryParams)
+        .then((res) => resolve(res.values))
+        .catch(errorHandler);
+
+      this.#getAllProjects()
+        .then((res) => {
+          console.log("got the projects result", res);
+          resolve(
+            res.filter(
+              (v) =>
+                v.key.toLowerCase().includes(projectName.toLowerCase()) ||
+                v.name.toLowerCase().includes(projectName.toLowerCase()),
+            ),
+          );
+        })
+        .catch(errorHandler);
+    });
+
+    return searchResults;
+  }
+
+  async #getAllProjects() {
+    return await AppStorage.getCachedItemOrLoad(
+      "all_projects",
+      30_000,
+      async () => {
+        return await this.#httpClient.getAsync("project");
+      },
+    );
   }
 
   async #getProjectStatusTypesAsync(projectKey) {
@@ -231,4 +274,3 @@ class JiraService {
 }
 
 export default new JiraService();
-

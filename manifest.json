@@ -13,9 +13,8 @@
     "type": "module"
   },
   "permissions": ["storage", "alarms", "notifications"],
-  "host_permissions": ["https://*.atlassian.net/*", "https://*.jira.com/*"],
+  "host_permissions": ["<all_urls>"],
   "action": {
     "default_popup": "popup.html"
   }
 }
-
